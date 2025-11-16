@@ -1,0 +1,14 @@
+# Robots.txt for demo.duyet.net
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://demo.duyet.net/sitemap.xml
+
+# Crawl-delay for politeness
+Crawl-delay: 1
+
+# Disallow legacy files
+Disallow: /*.legacy.html$
+Disallow: /*.legacy.js$

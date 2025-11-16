@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A curated collection of interactive demos and experiments by @duyetdev. Explore game development, data visualization, and web tools.">
+    <meta name="author" content="Van-Duyet Le">
+    <meta name="keywords" content="web development, demos, portfolio, JavaScript, games, tools">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://demo.duyet.net/">
+    <meta property="og:title" content="Demo Showcase - @duyetdev">
+    <meta property="og:description" content="A curated collection of interactive demos and experiments">
+    <meta property="og:image" content="https://demo.duyet.net/assets/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://demo.duyet.net/">
+    <meta property="twitter:title" content="Demo Showcase - @duyetdev">
+    <meta property="twitter:description" content="A curated collection of interactive demos and experiments">
+    <meta property="twitter:image" content="https://demo.duyet.net/assets/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="alternate icon" href="/assets/favicon.ico">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#6366f1">
+
+    <title>Demo Showcase - Interactive Projects & Experiments</title>
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Demo Showcase",
+      "alternateName": "@duyetdev demos",
+      "url": "https://demo.duyet.net/",
+      "description": "A curated collection of interactive demos and experiments",
+      "author": {
+        "@type": "Person",
+        "name": "Van-Duyet Le",
+        "url": "https://duyetdev.com",
+        "sameAs": [
+          "https://github.com/duyetdev",
+          "https://twitter.com/duyetdev",
+          "https://blog.duyetdev.com"
+        ]
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Van-Duyet Le"
+      },
+      "inLanguage": "en",
+      "copyrightYear": 2025,
+      "datePublished": "2016-12-01",
+      "dateModified": "2025-01-16"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "Flappy Bird Clone",
+            "url": "https://demo.duyet.net/flappy-bird/",
+            "applicationCategory": "GameApplication",
+            "description": "Classic Flappy Bird game clone built with Phaser.js"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "Barcode Generator",
+            "url": "https://demo.duyet.net/js-barcode/",
+            "applicationCategory": "UtilitiesApplication",
+            "description": "Generate multiple barcode formats including CODE128, EAN, UPC"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "Markdown to HTML Converter",
+            "url": "https://demo.duyet.net/md2html/",
+            "applicationCategory": "UtilitiesApplication",
+            "description": "Live markdown editor with real-time HTML preview"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            /* Color System */
+            --color-primary: #6366f1;
+            --color-primary-dark: #4f46e5;
+            --color-primary-light: #818cf8;
+            --color-accent: #f59e0b;
+            --color-success: #10b981;
+            --color-warning: #f59e0b;
+            --color-error: #ef4444;
+
+            /* Neutral Colors - Light Mode */
+            --color-bg: #ffffff;
+            --color-surface: #f9fafb;
+            --color-surface-hover: #f3f4f6;
+            --color-border: #e5e7eb;
+            --color-text: #111827;
+            --color-text-secondary: #6b7280;
+            --color-text-muted: #9ca3af;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+            /* Typography */
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #0f172a;
+                --color-surface: #1e293b;
+                --color-surface-hover: #334155;
+                --color-border: #334155;
+                --color-text: #f1f5f9;
+                --color-text-secondary: #cbd5e1;
+                --color-text-muted: #94a3b8;
+
+                --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+                --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+                --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+                --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
+            }
+        }
+
+        /* Reset & Base Styles */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        /* Header */
+        header {
+            padding: var(--spacing-2xl) 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -0.02em;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-xl);
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+
+        .author {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background: var(--color-surface);
+            border-radius: var(--radius-xl);
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            transition: all var(--transition-base);
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        .author:hover {
+            background: var(--color-surface-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .author::before {
+            content: "👨‍💻";
+            font-size: 1.25rem;
+        }
+
+        /* Projects Grid */
+        .projects {
+            padding: var(--spacing-3xl) 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+            color: var(--color-text);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .project-card {
+            background: var(--color-surface);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            border: 1px solid var(--color-border);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-base);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--color-primary);
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+            display: block;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text);
+        }
+
+        .project-description {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-lg);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .tag {
+            padding: var(--spacing-xs) var(--spacing-md);
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: all var(--transition-base);
+        }
+
+        .project-link:hover {
+            background: var(--color-primary-dark);
+            transform: translateX(4px);
+        }
+
+        .project-link::after {
+            content: '→';
+            font-size: 1.25rem;
+            transition: transform var(--transition-fast);
+        }
+
+        .project-link:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* External Projects */
+        .external-projects {
+            padding: var(--spacing-2xl) 0;
+            background: var(--color-surface);
+            border-radius: var(--radius-2xl);
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .external-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .external-link {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: var(--color-text);
+            transition: all var(--transition-base);
+        }
+
+        .external-link:hover {
+            border-color: var(--color-primary);
+            background: var(--color-surface-hover);
+            transform: translateX(4px);
+        }
+
+        .external-icon {
+            font-size: 1.5rem;
+        }
+
+        .external-text {
+            flex: 1;
+        }
+
+        .external-title {
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .external-url {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            font-family: var(--font-mono);
+        }
+
+        /* Footer */
+        footer {
+            padding: var(--spacing-3xl) 0;
+            text-align: center;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .footer-link {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            transition: color var(--transition-base);
+        }
+
+        .footer-link:hover {
+            color: var(--color-primary);
+        }
+
+        .footer-copyright {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .external-list {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Focus Styles */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <header role="banner">
+        <div class="header-bg" aria-hidden="true"></div>
+        <div class="container">
+            <h1 class="logo">Demo Showcase</h1>
+            <p class="tagline">A curated collection of interactive demos and experiments</p>
+            <a href="https://me.duyetdev.com" class="author" rel="author" target="_blank" aria-label="Visit author's website">
+                <span>Created by @duyetdev</span>
+            </a>
+        </div>
+    </header>
+
+    <main role="main">
+        <section class="projects" aria-labelledby="projects-heading">
+            <div class="container">
+                <h2 id="projects-heading" class="section-title">Featured Projects</h2>
+
+                <div class="projects-grid">
+                    <article class="project-card">
+                        <span class="project-icon" aria-hidden="true">🎮</span>
+                        <h3 class="project-title">Flappy Bird</h3>
+                        <p class="project-description">
+                            Classic Flappy Bird game clone built with Phaser.js. Navigate through pipes, beat your high score, and enjoy smooth gameplay with physics-based mechanics.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Phaser.js</span>
+                            <span class="tag">Game Dev</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                        <a href="/flappy-bird/" class="project-link" aria-label="Play Flappy Bird game">
+                            <span>Play Game</span>
+                        </a>
+                    </article>
+
+                    <article class="project-card">
+                        <span class="project-icon" aria-hidden="true">📊</span>
+                        <h3 class="project-title">Barcode Generator</h3>
+                        <p class="project-description">
+                            Generate multiple barcode formats including CODE128, EAN, UPC, and more. Customize appearance, preview in real-time, and download instantly.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">JsBarcode</span>
+                            <span class="tag">Tools</span>
+                            <span class="tag">Canvas</span>
+                        </div>
+                        <a href="/js-barcode/" class="project-link" aria-label="Open barcode generator tool">
+                            <span>Generate Barcodes</span>
+                        </a>
+                    </article>
+
+                    <article class="project-card">
+                        <span class="project-icon" aria-hidden="true">📝</span>
+                        <h3 class="project-title">Markdown to HTML</h3>
+                        <p class="project-description">
+                            Live markdown editor with real-time HTML preview. Built with Vue.js, featuring syntax highlighting and clean, responsive interface.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">Markdown</span>
+                            <span class="tag">Editor</span>
+                        </div>
+                        <a href="/md2html/" class="project-link" aria-label="Open markdown to HTML converter">
+                            <span>Convert Markdown</span>
+                        </a>
+                    </article>
+
+                    <article class="project-card">
+                        <span class="project-icon" aria-hidden="true">🌐</span>
+                        <h3 class="project-title">Ping URL</h3>
+                        <p class="project-description">
+                            Simple utility to check website availability and response times. Quick and straightforward ping testing tool.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Utilities</span>
+                            <span class="tag">Network</span>
+                            <span class="tag">Tools</span>
+                        </div>
+                        <a href="/ping-url/" class="project-link" aria-label="Open URL ping tool">
+                            <span>Ping URLs</span>
+                        </a>
+                    </article>
+                </div>
+
+                <div class="external-projects">
+                    <div class="container">
+                        <h2 class="section-title">More Projects</h2>
+                        <div class="external-list">
+                            <a href="https://json.duyet.net" class="external-link" target="_blank" rel="noopener noreferrer" aria-label="Visit JSON Tools">
+                                <span class="external-icon">🔧</span>
+                                <div class="external-text">
+                                    <div class="external-title">JSON Tools</div>
+                                    <div class="external-url">json.duyet.net</div>
+                                </div>
+                            </a>
+
+                            <a href="https://xmail.duyet.net" class="external-link" target="_blank" rel="noopener noreferrer" aria-label="Visit XMail Client">
+                                <span class="external-icon">📧</span>
+                                <div class="external-text">
+                                    <div class="external-title">XMail Client</div>
+                                    <div class="external-url">xmail.duyet.net</div>
+                                </div>
+                            </a>
+
+                            <a href="https://rain.duyet.net" class="external-link" target="_blank" rel="noopener noreferrer" aria-label="Visit Rain Sound">
+                                <span class="external-icon">🌧️</span>
+                                <div class="external-text">
+                                    <div class="external-title">Rain Sound</div>
+                                    <div class="external-url">rain.duyet.net</div>
+                                </div>
+                            </a>
+
+                            <a href="https://arkadia.duyet.net" class="external-link" target="_blank" rel="noopener noreferrer" aria-label="Visit Arkadia">
+                                <span class="external-icon">🎨</span>
+                                <div class="external-text">
+                                    <div class="external-title">Arkadia</div>
+                                    <div class="external-url">arkadia.duyet.net</div>
+                                </div>
+                            </a>
+
+                            <a href="https://offline.duyetdev.com" class="external-link" target="_blank" rel="noopener noreferrer" aria-label="Visit Offline Tools">
+                                <span class="external-icon">📱</span>
+                                <div class="external-text">
+                                    <div class="external-title">Offline Tools</div>
+                                    <div class="external-url">offline.duyetdev.com</div>
+                                </div>
+                            </a>
+
+                            <a href="https://api.duyet.net" class="external-link" target="_blank" rel="noopener noreferrer" aria-label="Visit API Services">
+                                <span class="external-icon">⚡</span>
+                                <div class="external-text">
+                                    <div class="external-title">API Services</div>
+                                    <div class="external-url">api.duyet.net</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">
+                    Open source demos and experiments, crafted with passion.
+                </p>
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="https://github.com/duyetdev" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://me.duyetdev.com" class="footer-link" target="_blank" rel="noopener noreferrer">About</a>
+                    <a href="/about.md" class="footer-link">License</a>
+                </nav>
+                <p class="footer-copyright">
+                    © 2016-2025 Van-Duyet Le • MIT License
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Register Service Worker for PWA capabilities
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered successfully:', registration.scope);
+
+                        // Check for updates every hour
+                        setInterval(() => {
+                            registration.update();
+                        }, 3600000);
+                    })
+                    .catch((error) => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
+
+        // Simple analytics-free page view tracking
+        if ('performance' in window && 'getEntriesByType' in performance) {
+            const navEntry = performance.getEntriesByType('navigation')[0];
+            if (navEntry) {
+                console.log('Page load performance:', {
+                    loadTime: navEntry.loadEventEnd - navEntry.loadEventStart,
+                    domContentLoaded: navEntry.domContentLoadedEventEnd - navEntry.domContentLoadedEventStart
+                });
+            }
+        }
+
+        // Preload links on hover for better perceived performance
+        document.querySelectorAll('.project-link, .external-link').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                const prefetchLink = document.createElement('link');
+                prefetchLink.rel = 'prefetch';
+                prefetchLink.href = link.href;
+                document.head.appendChild(prefetchLink);
+            }, { once: true });
+        });
+    </script>
+</body>
+</html>

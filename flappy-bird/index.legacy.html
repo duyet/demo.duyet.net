@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Flappy Bird Clone</title>
+    <style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-size: 14px;
+        line-height: 1.5;
+        color: #333;
+        background-color: #fff;
+    }
+    
+    a {
+        color: #4078c0;
+        text-decoration: none;
+    }
+    
+    a:hover,
+    a:active {
+        text-decoration: underline;
+    }
+    
+    h1 {
+        font-size: 2em;
+        margin: 0.67em 0;
+    }
+    
+    hr,
+    .rule {
+        height: 0;
+        margin: 15px 0;
+        overflow: hidden;
+        background: transparent;
+        border: 0;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    hr::before,
+    .rule::before {
+        display: table;
+        content: "";
+    }
+    
+    hr::after,
+    .rule::after {
+        display: table;
+        clear: both;
+        content: "";
+    }
+    
+    .text-center {
+        text-align: center !important;
+    }
+    
+    #game_div,
+    p {
+        width: 400px;
+        margin: auto;
+        margin-top: 20px;
+    }
+    </style>
+    <script type="text/javascript" src="phaser.min.js"></script>
+    <script type="text/javascript" src="load.js"></script>
+    <script type="text/javascript" src="menu.js"></script>
+    <script type="text/javascript" src="play.js"></script>
+    <script type="text/javascript" src="game.js"></script>
+</head>
+
+<body>
+    <p>Press the spacebar to jump</p>
+    <div id="game_div"> </div>
+    <p>Xem tutorials tại đây:
+        <a href="https://blog.duyetdev.com/2014/02/huong-dan-viet-game-flappy-bird-bang.html" target="_blank">Phần 1</a>,
+        <a href="https://blog.duyetdev.com/2014/03/huong-dan-viet-game-flappy-bird-bang.html" target="_blank">Phần 2</a> và
+        <a href="https://blog.duyetdev.com/2014/04/huong-dan-viet-game-flappy-bird-bang.html" target="_blank">Phần 3</a></p>
+    <hr />
+    <div class="text-center">
+        <p>back to <a href="http://demo.duyetdev.com">demo.duyetdev.com</a> - by <a href="http://duyetdev.com">duyetdev</a></p>
+    </div>
+</body>
+
+</html>

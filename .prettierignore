@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+.vite/
+
+# Minified files
+*.min.js
+*.min.css
+
+# Third-party libraries
+**/phaser.min.js
+**/JsBarcode.all.min.js
+**/jquery*.js
+**/rangeslider.min.js
+**/vendor.*.js
+**/client.*.js
+**/manifest.*.js
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Logs
+*.log
+
+# Coverage
+coverage/
+
+# Other
+.DS_Store
+CNAME
+LICENSE
