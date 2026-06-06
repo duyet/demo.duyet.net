@@ -1,85 +1,267 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Flappy Bird Clone</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Classic Flappy Bird game clone. Navigate through pipes and beat your high score. Built with Phaser.js.">
+    <meta name="keywords" content="flappy bird, game, phaser, javascript, browser game">
+
+    <title>Flappy Bird - Classic Game Clone</title>
+
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
     <style>
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        font-size: 14px;
-        line-height: 1.5;
-        color: #333;
-        background-color: #fff;
-    }
-    
-    a {
-        color: #4078c0;
-        text-decoration: none;
-    }
-    
-    a:hover,
-    a:active {
-        text-decoration: underline;
-    }
-    
-    h1 {
-        font-size: 2em;
-        margin: 0.67em 0;
-    }
-    
-    hr,
-    .rule {
-        height: 0;
-        margin: 15px 0;
-        overflow: hidden;
-        background: transparent;
-        border: 0;
-        border-bottom: 1px solid #ddd;
-    }
-    
-    hr::before,
-    .rule::before {
-        display: table;
-        content: "";
-    }
-    
-    hr::after,
-    .rule::after {
-        display: table;
-        clear: both;
-        content: "";
-    }
-    
-    .text-center {
-        text-align: center !important;
-    }
-    
-    #game_div,
-    p {
-        width: 400px;
-        margin: auto;
-        margin-top: 20px;
-    }
+        :root {
+            --color-primary: #6366f1;
+            --color-primary-dark: #4f46e5;
+            --color-bg: #ffffff;
+            --color-surface: #f9fafb;
+            --color-border: #e5e7eb;
+            --color-text: #111827;
+            --color-text-secondary: #6b7280;
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #0f172a;
+                --color-surface: #1e293b;
+                --color-border: #334155;
+                --color-text: #f1f5f9;
+                --color-text-secondary: #cbd5e1;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            padding: var(--spacing-xl);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            margin-bottom: var(--spacing-lg);
+            transition: color var(--transition-base);
+        }
+
+        .back-link:hover {
+            color: var(--color-primary);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--color-primary) 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--color-text-secondary);
+            font-size: 1rem;
+        }
+
+        .game-wrapper {
+            background: var(--color-surface);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .instructions {
+            text-align: center;
+            padding: var(--spacing-md);
+            background: linear-gradient(135deg, var(--color-primary) 0%, #818cf8 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-lg);
+            font-weight: 500;
+        }
+
+        .instructions kbd {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 0.25rem;
+            font-family: monospace;
+            font-weight: 700;
+            margin: 0 0.25rem;
+        }
+
+        #game_div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+
+        #game_div canvas {
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .resources {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .resources h2 {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text);
+        }
+
+        .resources-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+        }
+
+        .resources a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color var(--transition-base);
+        }
+
+        .resources a:hover {
+            color: var(--color-primary-dark);
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+        }
+
+        footer a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: var(--spacing-md);
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .game-wrapper {
+                padding: var(--spacing-md);
+            }
+
+            #game_div {
+                min-height: 300px;
+            }
+
+            #game_div canvas {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
     </style>
-    <script type="text/javascript" src="phaser.min.js"></script>
-    <script type="text/javascript" src="load.js"></script>
-    <script type="text/javascript" src="menu.js"></script>
-    <script type="text/javascript" src="play.js"></script>
-    <script type="text/javascript" src="game.js"></script>
 </head>
-
 <body>
-    <p>Press the spacebar to jump</p>
-    <div id="game_div"> </div>
-    <p>Xem tutorials tại đây:
-        <a href="https://blog.duyetdev.com/2014/02/huong-dan-viet-game-flappy-bird-bang.html" target="_blank">Phần 1</a>,
-        <a href="https://blog.duyetdev.com/2014/03/huong-dan-viet-game-flappy-bird-bang.html" target="_blank">Phần 2</a> và
-        <a href="https://blog.duyetdev.com/2014/04/huong-dan-viet-game-flappy-bird-bang.html" target="_blank">Phần 3</a></p>
-    <hr />
-    <div class="text-center">
-        <p>back to <a href="http://demo.duyetdev.com">demo.duyetdev.com</a> - by <a href="http://duyetdev.com">duyetdev</a></p>
-    </div>
-</body>
+    <div class="container">
+        <a href="/" class="back-link">
+            <span>←</span>
+            <span>Back to Home</span>
+        </a>
 
+        <header>
+            <h1>🐦 Flappy Bird</h1>
+            <p class="subtitle">Classic game clone built with Phaser.js</p>
+        </header>
+
+        <main>
+            <div class="game-wrapper">
+                <div class="instructions">
+                    Press <kbd>SPACE</kbd> or <kbd>CLICK</kbd> to jump
+                </div>
+
+                <div id="game_div" role="application" aria-label="Flappy Bird game"></div>
+            </div>
+
+            <section class="resources">
+                <h2>Learn How This Was Built</h2>
+                <p style="margin-bottom: 1rem; color: var(--color-text-secondary);">
+                    Check out the tutorial series (in Vietnamese):
+                </p>
+                <div class="resources-list">
+                    <a href="https://blog.duyetdev.com/2014/02/huong-dan-viet-game-flappy-bird-bang.html"
+                       target="_blank"
+                       rel="noopener noreferrer">Part 1</a>
+                    <span style="color: var(--color-text-secondary);">•</span>
+                    <a href="https://blog.duyetdev.com/2014/03/huong-dan-viet-game-flappy-bird-bang.html"
+                       target="_blank"
+                       rel="noopener noreferrer">Part 2</a>
+                    <span style="color: var(--color-text-secondary);">•</span>
+                    <a href="https://blog.duyetdev.com/2014/04/huong-dan-viet-game-flappy-bird-bang.html"
+                       target="_blank"
+                       rel="noopener noreferrer">Part 3</a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>
+                Created by <a href="https://duyetdev.com" target="_blank" rel="noopener">@duyetdev</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="phaser.min.js"></script>
+    <script src="load.js"></script>
+    <script src="menu.js"></script>
+    <script src="play.js"></script>
+    <script src="game.js"></script>
+</body>
 </html>

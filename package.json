@@ -1,0 +1,69 @@
+{
+  "name": "demo-duyet-net",
+  "version": "2.0.0",
+  "description": "A curated collection of interactive demos and experiments",
+  "author": "Van-Duyet Le <me@duyet.net>",
+  "license": "MIT",
+  "homepage": "https://demo.duyet.net",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/duyetdev/demo.duyet.net.git"
+  },
+  "bugs": {
+    "url": "https://github.com/duyetdev/demo.duyet.net/issues"
+  },
+  "keywords": [
+    "demos",
+    "portfolio",
+    "web-development",
+    "javascript",
+    "games",
+    "tools"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .js,.html --fix",
+    "format": "prettier --write \"**/*.{js,json,css,html,md}\"",
+    "format:check": "prettier --check \"**/*.{js,json,css,html,md}\"",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "optimize:images": "node scripts/optimize-images.js",
+    "lighthouse": "lighthouse https://demo.duyet.net --view",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@vitest/ui": "^2.1.8",
+    "eslint": "^9.15.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-html": "^8.1.2",
+    "globals": "^15.12.0",
+    "husky": "^9.1.7",
+    "lighthouse": "^12.2.1",
+    "lint-staged": "^15.2.11",
+    "prettier": "^3.3.3",
+    "sharp": "^0.33.5",
+    "vite": "^6.0.1",
+    "vite-plugin-compression": "^0.5.1",
+    "vitest": "^2.1.8",
+    "workbox-cli": "^7.3.0"
+  },
+  "dependencies": {},
+  "lint-staged": {
+    "*.{js,html}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
